@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { fromEvent } from 'rxjs';
+import { Movie } from 'src/app/interfaces/movie';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
@@ -8,18 +10,23 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class MoviesComponent implements OnInit {
 
-  movies: any[] = []; //inicializamos donde vamos a almacenar las peliculas
-
+  movies: Movie[] = []; //inicializamos donde vamos a almacenar las peliculas
+  @ViewChild('movieSearchInput') movieSearchInput!: ElementRef
 
   constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
+    fromEvent(this.movieSearchInput.nativeElement, 'keyup').pipe(
+    
+    ).subscribe
   }
 
-  getMovies(searchTerm: string){
+  getMovies(event: Event){
+    const searchTerm = (event.target as HTMLInputElement).value;
+    console.log(searchTerm);
     this.movieService.getMovies(searchTerm).subscribe(movies =>{
       console.log(movies);
-      this.movies = movies;
+      this.movies = movies !== undefined ? movies : [];
     })
     
   }

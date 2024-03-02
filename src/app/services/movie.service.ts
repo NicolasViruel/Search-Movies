@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiResponse } from '../interfaces/apiResponse';
-import { Movie } from '../interfaces/Movie';
+import { ApiResponse } from '../interfaces/apiResponse'
+import { Movie } from '../interfaces/movie';
 import { map } from 'rxjs/operators';
 
 @Injectable({
